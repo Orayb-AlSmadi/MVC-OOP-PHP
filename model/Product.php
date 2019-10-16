@@ -9,6 +9,7 @@ class Product
     private $created;
     private $category_id;
 
+
     /**
      * Product constructor.
      * @param $created

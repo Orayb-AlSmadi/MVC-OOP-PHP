@@ -6,6 +6,7 @@ $id= $_SESSION["id"];
 
 include "../../database/DB.php";
 include "../../model/Product.php";
+include "../../model/Category.php";
 
 $DB = new DB();
 $conn = $DB->connect();
@@ -13,14 +14,17 @@ $conn = $DB->connect();
 $prod = new Product();
 $arr= $prod->getData($conn);
 
+$cat= new Category();
+$category= $cat->getData($conn);
+
 for ($i=0; $i<count($arr); $i++){
     if($arr[$i]['id']== $_SESSION["id"]){
         $product= $arr[$i];
     }
 }
 
-print_r($product) ;
- echo $product['name'];
+//print_r($product) ;
+// echo $product['name'];
 
  if(isset($_POST['update'])){
      $prod->setName($_POST['name']);
@@ -55,11 +59,12 @@ print_r($product) ;
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Options</label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01">
+            <select class="custom-select" name="categoryId"  id="inputGroupSelect01">
+
                 <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <?php for($i=0; $i<count($category); $i++) {?>
+                    <option value="<?php echo $category[$i]['id'] ?>"><?php echo $category[$i]['name'] ?></option>
+                <?php } ?>
             </select>
 
         </div>
