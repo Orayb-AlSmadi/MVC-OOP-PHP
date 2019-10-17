@@ -6,7 +6,7 @@ class DB
 private $servername = "localhost";
 private $dbname = "store";
 private $username = "root";
-private $password = "20092014As";
+private $password = "123456@Mysql";
 
 function connect (){
     try {
